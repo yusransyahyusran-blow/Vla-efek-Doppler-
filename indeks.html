@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VLA Fisika — Efek Doppler | SMA/MA Kelas XI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+<style>
+:root {
+  --bg: #f5f4f0;
+  --bg2: #ffffff;
+  --bg3: #eeedea;
+  --text: #1a1a1a;
+  --text2: #5a5a5a;
+  --text3: #9a9a9a;
+  --border: rgba(0,0,0,0.08);
+  --border2: rgba(0,0,0,0.15);
+  --blue: #185FA5;
+  --blue-light: #E6F1FB;
+  --blue-dark: #042C53;
+  --green: #3B6D11;
+  --green-light: #EAF3DE;
+  --amber: #BA7517;
+  --amber-light: #FAEEDA;
+  --red: #A32D2D;
+  --red-light: #FCEBEB;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+/* NAV */
+.nav {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.04);
+}
+.nav-logo {
+  font-size: 15px;
+  font-weight: 600;
+  padding: 1rem 1.25rem 1rem 0;
+  border-right: 1px solid var(--border);
+  margin-right: 0.75rem;
+  color: var(--text);
+  white-space: nowrap;
+}
+.nav-logo span { color: var(--blue); }
+.nav-tab {
+  font-size: 13px;
+  padding: 1rem 0.85rem;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  color: var(--text2);
+  transition: all .2s;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.nav-tab:hover { color: var(--text); }
+.nav-tab.active { color: var(--blue); border-bottom-color: var(--blue); font-weight: 600; }
+.nav-tab i { font-size: 15px; }
+
+/* LAYOUT */
+.page { display: none; padding: 1.5rem; max-width: 920px; margin: 0 auto; }
+.page.active { display: block; }
+
+/* CARD */
+.card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  box-shadow: var(--shadow);
+}
+.card h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.card h3 i { color: var(--blue); font-size: 16px; }
+
+/* HERO */
+.hero {
+  background: linear-gradient(135deg, #042C53 0%, #185FA5 60%, #0F6E56 100%);
+  border-radius: var(--radius);
+  padding: 2.5rem 2rem;
+  margin-bottom: 1rem;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.05);
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -40px; left: -40px;
+  width: 150px; height: 150px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.04);
+}
+.hero-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-bottom: 0.75rem;
+}
+.hero h1 { font-size: 26px; font-weight: 600; margin-bottom: 0.5rem; }
+.hero p { font-size: 14px; opacity: 0.8; line-height: 1.7; margin-bottom: 1.25rem; max-width: 500px; }
+.hero-badges { display: flex; gap: 8px; flex-wrap: wrap; }
+.hero-badge {
+  font-size: 11px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  background: rgba(255,255,255,0.15);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.hero-badge.s { background: rgba(24,95,165,0.4); }
+.hero-badge.t { background: rgba(15,110,86,0.4); }
+.hero-badge.e { background: rgba(186,117,23,0.4); }
+.hero-badge.m { background: rgba(163,45,45,0.4); }
+
+/* MENU GRID */
+.menu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 1rem; }
+.menu-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: all .2s;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+.menu-card:hover {
+  border-color: var(--blue);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 20px rgba(24,95,165,0.12);
+}
+.menu-card .mc-icon {
+  width: 52px; height: 52px;
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 1rem;
+  font-size: 22px;
+}
+.mc-icon.blue { background: var(--blue-light); color: var(--blue); }
+.mc-icon.green { background: var(--green-light); color: var(--green); }
+.mc-icon.amber { background: var(--amber-light); color: var(--amber); }
+.mc-icon.red { background: var(--red-light); color: var(--red); }
+.menu-card h3 { font-size: 14px; font-weight: 600; margin-bottom: 0.4rem; }
+.menu-card p { font-size: 12px; color: var(--text2); line-height: 1.6; }
+
+/* SIMULATION */
+.sim-canvas-wrap {
+  background: #080d1a;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+.sim-canvas { width: 100%; display: block; }
+.controls-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+.ctrl-row { display: flex; flex-direction: column; gap: 5px; }
+.ctrl-label {
+  font-size: 12px;
+  color: var(--text2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ctrl-label .val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--blue);
+  background: var(--blue-light);
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+input[type=range] {
+  width: 100%;
+  accent-color: var(--blue);
+  cursor: pointer;
+  height: 4px;
+}
+.formula-box {
+  background: var(--bg3);
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  text-align: center;
+  border: 1px solid var(--border);
+  margin-bottom: 0.75rem;
+}
+.formula-main { font-size: 16px; font-weight: 500; color: var(--blue); }
+.result-row { display: flex; gap: 0.75rem; }
+.result-item {
+  flex: 1;
+  background: var(--bg3);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem;
+  text-align: center;
+  border: 1px solid var(--border);
+}
+.result-item .rv { font-size: 20px; font-weight: 600; font-family: 'JetBrains Mono', monospace; }
+.result-item .rl { font-size: 11px; color: var(--text3); margin-top: 3px; }
+.rv-up { color: var(--blue); }
+.rv-dn { color: var(--red); }
+.rv-delta { color: var(--green); }
+
+/* WAVE */
+.wave-wrap {
+  background: #080d1a;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+.wave-canvas { width: 100%; display: block; }
+.wave-controls { display: flex; gap: 1rem; align-items: center; margin-top: 0.75rem; flex-wrap: wrap; }
+.wave-info { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-top: 0.75rem; }
+.wi { background: var(--bg3); border-radius: var(--radius-sm); padding: 0.6rem 0.75rem; font-size: 12px; border: 1px solid var(--border); }
+.wi strong { display: block; font-size: 15px; font-weight: 600; font-family: 'JetBrains Mono', monospace; }
+.wave-legend { display: flex; gap: 1rem; margin-top: 0.5rem; font-size: 12px; flex-wrap: wrap; color: var(--text2); }
+.leg { display: flex; align-items: center; gap: 5px; }
+.leg-dot { width: 16px; height: 3px; border-radius: 2px; }
+.btn-sm {
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border2);
+  background: var(--bg2);
+  cursor: pointer;
+  font-size: 12px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: var(--text);
+  transition: all .15s;
+  white-space: nowrap;
+}
+.btn-sm:hover { background: var(--bg3); }
+.btn-sm.active { background: var(--blue); color: white; border-color: var(--blue); }
+
+/* CHAT */
+.chat-wrap { display: flex; flex-direction: column; }
+.chat-messages {
+  height: 380px;
+  overflow-y: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background: var(--bg3);
+  border-radius: var(--radius-sm);
+  margin-bottom: 0.75rem;
+  border: 1px solid var(--border);
+}
+.msg { display: flex; gap: 10px; align-items: flex-start; }
+.msg-ai { flex-direction: row; }
+.msg-user { flex-direction: row-reverse; }
+.msg-avatar {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 600;
+  flex-shrink: 0;
+}
+.av-ai { background: var(--blue-light); color: var(--blue); }
+.av-user { background: var(--green-light); color: var(--green); }
+.msg-bubble {
+  max-width: 78%;
+  padding: 0.65rem 0.9rem;
+  border-radius: 12px;
+  font-size: 13px;
+  line-height: 1.65;
+}
+.bub-ai {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+.bub-user {
+  background: var(--blue);
+  color: white;
+}
+.chat-input-row { display: flex; gap: 8px; }
+.chat-input-row input {
+  flex: 1;
+  padding: 0.65rem 1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border2);
+  background: var(--bg2);
+  color: var(--text);
+  font-size: 13px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  outline: none;
+  transition: border-color .2s;
+}
+.chat-input-row input:focus { border-color: var(--blue); }
+.chat-input-row button {
+  padding: 0.65rem 1.1rem;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: var(--blue);
+  color: white;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  display: flex; align-items: center; gap: 5px;
+  transition: opacity .2s;
+}
+.chat-input-row button:disabled { opacity: .5; cursor: not-allowed; }
+.quick-chips { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 0.75rem; }
+.chip {
+  font-size: 12px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--border2);
+  cursor: pointer;
+  transition: all .15s;
+  background: var(--bg2);
+  color: var(--text2);
+}
+.chip:hover { background: var(--blue-light); color: var(--blue); border-color: var(--blue); }
+.typing-dots span { animation: blink 1.2s infinite; font-size: 18px; }
+.typing-dots span:nth-child(2) { animation-delay: .2s; }
+.typing-dots span:nth-child(3) { animation-delay: .4s; }
+@keyframes blink { 0%,80%,100%{opacity:0} 40%{opacity:1} }
+.ai-notice {
+  font-size: 11px;
+  color: var(--text3);
+  background: var(--amber-light);
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 0.75rem;
+  border: 1px solid rgba(186,117,23,0.2);
+}
+
+/* QUIZ */
+.quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; }
+.progress-wrap { flex: 1; background: var(--bg3); border-radius: 20px; height: 6px; margin: 0 1rem; }
+.progress-fill { background: var(--blue); border-radius: 20px; height: 100%; transition: width .4s ease; }
+.q-meta { font-size: 12px; color: var(--text2); white-space: nowrap; font-family: 'JetBrains Mono', monospace; }
+.q-text { font-size: 15px; font-weight: 500; margin-bottom: 1.25rem; line-height: 1.65; }
+.q-opts { display: flex; flex-direction: column; gap: 0.6rem; }
+.q-opt {
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--border2);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 13px;
+  transition: all .15s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  line-height: 1.5;
+}
+.q-opt:hover:not(.disabled) { background: var(--blue-light); border-color: var(--blue); }
+.q-opt.correct { background: var(--green-light); border-color: var(--green); color: #173404; }
+.q-opt.wrong { background: var(--red-light); border-color: var(--red); color: #501313; }
+.q-opt.disabled { cursor: default; }
+.opt-letter {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  border: 1.5px solid currentColor;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 600;
+  flex-shrink: 0;
+  font-family: 'JetBrains Mono', monospace;
+}
+.q-fb {
+  margin-top: 0.75rem;
+  padding: 0.8rem 1rem;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  line-height: 1.6;
+  display: none;
+}
+.fb-ok { background: var(--green-light); color: #173404; border: 1px solid var(--green); }
+.fb-no { background: var(--red-light); color: #501313; border: 1px solid var(--red); }
+.btn-next {
+  margin-top: 1rem;
+  padding: 0.65rem 1.5rem;
+  background: var(--blue);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 13px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 600;
+  display: none;
+  transition: opacity .2s;
+}
+.btn-next:hover { opacity: 0.85; }
+
+/* SELF EFFICACY */
+.se-wrap { display: flex; flex-direction: column; gap: 0.6rem; }
+.se-row { display: flex; align-items: center; gap: 10px; font-size: 12px; }
+.se-label { min-width: 150px; color: var(--text2); }
+.se-bar-bg { flex: 1; height: 6px; background: var(--bg3); border-radius: 20px; }
+.se-bar-fill { height: 100%; border-radius: 20px; transition: width .5s ease; }
+.se-pct { min-width: 36px; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; }
+
+/* RESULT */
+.result-page { text-align: center; padding: 2rem; }
+.score-big { font-size: 64px; font-weight: 700; color: var(--blue); font-family: 'JetBrains Mono', monospace; line-height: 1; }
+.score-sub { font-size: 13px; color: var(--text2); margin-top: 6px; }
+.score-msg { font-size: 14px; color: var(--text); line-height: 1.7; margin: 1.25rem auto; max-width: 400px; }
+.score-cats { display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap; }
+.score-cat {
+  text-align: center;
+  padding: 1rem 1.25rem;
+  background: var(--bg3);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  min-width: 90px;
+}
+.score-cat .n { font-size: 22px; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+.score-cat .l { font-size: 11px; color: var(--text2); margin-top: 3px; }
+.btn-retry {
+  padding: 0.7rem 2rem;
+  border: 1.5px solid var(--blue);
+  background: transparent;
+  color: var(--blue);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  margin-top: 1.5rem;
+  transition: all .2s;
+}
+.btn-retry:hover { background: var(--blue); color: white; }
+
+/* STEM INFO */
+.stem-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+.stem-item { padding: 0.75rem; background: var(--bg3); border-radius: var(--radius-sm); border: 1px solid var(--border); font-size: 12px; color: var(--text2); line-height: 1.7; }
+.stem-item strong { display: block; font-size: 13px; color: var(--text); margin-bottom: 3px; }
+
+/* FOOTER */
+.footer { text-align: center; padding: 2rem 1rem; font-size: 12px; color: var(--text3); }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo">VLA <span>Fisika</span></div>
+  <div class="nav-tab active" onclick="showPage('home')" id="tab-home">
+    <i class="ti ti-home"></i> Beranda
+  </div>
+  <div class="nav-tab" onclick="showPage('simulasi')" id="tab-simulasi">
+    <i class="ti ti-adjustments-horizontal"></i> Simulasi
+  </div>
+  <div class="nav-tab" onclick="showPage('visualisasi')" id="tab-visualisasi">
+    <i class="ti ti-wave-sine"></i> Gelombang
+  </div>
+  <div class="nav-tab" onclick="showPage('ai')" id="tab-ai">
+    <i class="ti ti-robot"></i> AI Asisten
+  </div>
+  <div class="nav-tab" onclick="showPage('kuis')" id="tab-kuis">
+    <i class="ti ti-clipboard-check"></i> Kuis
+  </div>
+</nav>
+
+<!-- ===== BERANDA ===== -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="hero-eyebrow">SMA / MA Kelas XI · Fisika</div>
+    <h1>Virtual Laboratory Assistant<br>Efek Doppler</h1>
+    <p>Laboratorium virtual berbasis STEM terintegrasi AI untuk memahami Efek Doppler secara interaktif dan menyenangkan.</p>
+    <div class="hero-badges">
+      <span class="hero-badge s">Science</span>
+      <span class="hero-badge t">Technology</span>
+      <span class="hero-badge e">Engineering</span>
+      <span class="hero-badge m">Mathematics</span>
+    </div>
+  </div>
+
+  <div class="menu-grid">
+    <div class="menu-card" onclick="showPage('simulasi')">
+      <div class="mc-icon blue"><i class="ti ti-adjustments-horizontal"></i></div>
+      <h3>Simulasi Interaktif</h3>
+      <p>Simulasi sumber bunyi bergerak dengan kontrol kecepatan dan frekuensi real-time</p>
+    </div>
+    <div class="menu-card" onclick="showPage('visualisasi')">
+      <div class="mc-icon green"><i class="ti ti-wave-sine"></i></div>
+      <h3>Visualisasi Gelombang</h3>
+      <p>Animasi muka gelombang Doppler — sumber mendekati dan menjauh</p>
+    </div>
+    <div class="menu-card" onclick="showPage('ai')">
+      <div class="mc-icon amber"><i class="ti ti-robot"></i></div>
+      <h3>AI Asisten</h3>
+      <p>Tanya jawab cerdas tentang Efek Doppler dengan AI berbasis Claude</p>
+    </div>
+    <div class="menu-card" onclick="showPage('kuis')">
+      <div class="mc-icon red"><i class="ti ti-clipboard-check"></i></div>
+      <h3>Kuis & Self-Efficacy</h3>
+      <p>Uji pemahaman dan ukur tingkat kepercayaan diri kamu dalam materi ini</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><i class="ti ti-info-circle"></i>Apa itu Efek Doppler?</h3>
+    <p style="font-size:13px;color:var(--text2);line-height:1.8;margin-bottom:1rem">
+      Efek Doppler adalah perubahan frekuensi atau panjang gelombang yang diamati ketika sumber gelombang bergerak relatif terhadap pengamat. Dirumuskan oleh Christian Doppler (1842), efek ini berlaku untuk gelombang bunyi, cahaya, dan gelombang lainnya.
+    </p>
+    <p style="font-size:13px;color:var(--text2);line-height:1.8">
+      <strong style="color:var(--text)">Contoh nyata:</strong> Suara sirene ambulans terdengar lebih tinggi saat mendekat dan lebih rendah saat menjauh. Hal ini terjadi karena muka gelombang "tertekan" ketika sumber mendekat dan "meregang" ketika sumber menjauh.
+    </p>
+  </div>
+</div>
+
+<!-- ===== SIMULASI ===== -->
+<div class="page" id="page-simulasi">
+  <div class="card">
+    <h3><i class="ti ti-adjustments-horizontal"></i>Simulasi Sumber Bunyi Bergerak</h3>
+    <div class="sim-canvas-wrap">
+      <canvas class="sim-canvas" id="simCanvas" height="200"></canvas>
+    </div>
+    <div class="controls-grid">
+      <div class="ctrl-row">
+        <div class="ctrl-label">Kecepatan Sumber (vs) <span class="val" id="vsVal">50 m/s</span></div>
+        <input type="range" min="0" max="300" value="50" id="vsSlider" oninput="updateSim()">
+      </div>
+      <div class="ctrl-row">
+        <div class="ctrl-label">Frekuensi Sumber (f₀) <span class="val" id="fsVal">440 Hz</span></div>
+        <input type="range" min="100" max="1000" value="440" step="10" id="fsSlider" oninput="updateSim()">
+      </div>
+      <div class="ctrl-row">
+        <div class="ctrl-label">Kecepatan Bunyi (v) <span class="val" id="vbVal">340 m/s</span></div>
+        <input type="range" min="200" max="400" value="340" step="10" id="vbSlider" oninput="updateSim()">
+      </div>
+      <div class="ctrl-row">
+        <div class="ctrl-label">Arah Sumber <span class="val" id="dirVal">Mendekati</span></div>
+        <input type="range" min="0" max="1" value="0" step="1" id="dirSlider" oninput="updateSim()">
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><i class="ti ti-math-function"></i>Perhitungan</h3>
+    <div class="formula-box">
+      <div class="formula-main" id="formulaDisplay">f' = v / (v − vs) × f₀</div>
+    </div>
+    <div class="result-row">
+      <div class="result-item">
+        <div class="rv rv-up" id="freqApproach">—</div>
+        <div class="rl">f' Mendekati (Hz)</div>
+      </div>
+      <div class="result-item">
+        <div class="rv rv-dn" id="freqRecede">—</div>
+        <div class="rl">f' Menjauh (Hz)</div>
+      </div>
+      <div class="result-item">
+        <div class="rv rv-delta" id="deltaFreq">—</div>
+        <div class="rl">Selisih (Hz)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><i class="ti ti-atom"></i>Konteks STEM</h3>
+    <div class="stem-grid">
+      <div class="stem-item"><strong>Science</strong>Perubahan frekuensi akibat gerak relatif sumber & pengamat dalam medium udara.</div>
+      <div class="stem-item"><strong>Technology</strong>Radar kecepatan, USG Doppler, sonar kapal selam, sensor gerak.</div>
+      <div class="stem-item"><strong>Engineering</strong>Desain sensor pada sistem deteksi kecepatan kendaraan (speed gun).</div>
+      <div class="stem-item"><strong>Mathematics</strong>f' = v/(v±vs) × f₀ — rasio kecepatan bunyi dan kecepatan sumber.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== VISUALISASI ===== -->
+<div class="page" id="page-visualisasi">
+  <div class="card">
+    <h3><i class="ti ti-wave-sine"></i>Animasi Muka Gelombang</h3>
+    <div class="wave-wrap">
+      <canvas class="wave-canvas" id="waveCanvas" height="300"></canvas>
+    </div>
+    <div class="wave-legend">
+      <div class="leg"><div class="leg-dot" style="background:#4FC3F7"></div>Muka gelombang</div>
+      <div class="leg"><div class="leg-dot" style="background:#FFB74D"></div>Sumber bunyi</div>
+      <div class="leg"><div class="leg-dot" style="background:#81C784"></div>Pengamat</div>
+    </div>
+    <div class="wave-controls">
+      <div class="ctrl-row" style="flex:1">
+        <div class="ctrl-label">Kecepatan sumber <span class="val" id="wvLabel">0.50× bunyi</span></div>
+        <input type="range" min="0" max="90" value="50" id="wvSlider" oninput="updateWaveInfo()">
+      </div>
+      <button class="btn-sm" id="scenBtn" onclick="toggleScenario()">Mendekati</button>
+      <button class="btn-sm" id="pauseBtn" onclick="togglePause()">⏸ Jeda</button>
+    </div>
+    <div class="wave-info">
+      <div class="wi"><strong id="wvFreqA" style="color:#4FC3F7">—</strong>Hz (depan)</div>
+      <div class="wi"><strong id="wvFreqB" style="color:#EF5350">—</strong>Hz (belakang)</div>
+      <div class="wi"><strong>340</strong>m/s bunyi</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><i class="ti ti-bulb"></i>Penjelasan</h3>
+    <div class="stem-grid">
+      <div class="stem-item">
+        <strong style="color:#185FA5">Sumber Mendekat</strong>
+        Muka gelombang "tertekan" → panjang gelombang lebih pendek → frekuensi lebih tinggi → nada lebih tinggi (pitch naik)
+      </div>
+      <div class="stem-item">
+        <strong style="color:#A32D2D">Sumber Menjauh</strong>
+        Muka gelombang "meregang" → panjang gelombang lebih panjang → frekuensi lebih rendah → nada lebih rendah (pitch turun)
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== AI ASISTEN ===== -->
+<div class="page" id="page-ai">
+  <div class="card">
+    <h3><i class="ti ti-robot"></i>AI Asisten — Efek Doppler</h3>
+    <div class="ai-notice">
+      ⚠️ Fitur AI Asisten membutuhkan koneksi internet dan API key Anthropic. Jika tidak tersedia, gunakan fitur lain yang tersedia secara offline.
+    </div>
+    <p style="font-size:12px;color:var(--text2);margin-bottom:0.75rem">Tanya apa saja tentang Efek Doppler. AI akan menjawab sesuai level SMA/MA kelas XI.</p>
+    <div class="quick-chips">
+      <div class="chip" onclick="sendQuick('Apa itu Efek Doppler dan bagaimana cara kerjanya?')">Apa itu Efek Doppler?</div>
+      <div class="chip" onclick="sendQuick('Berikan contoh Efek Doppler dalam kehidupan sehari-hari')">Contoh nyata</div>
+      <div class="chip" onclick="sendQuick('Jelaskan rumus Efek Doppler secara lengkap')">Rumus Doppler</div>
+      <div class="chip" onclick="sendQuick('Bagaimana Efek Doppler digunakan pada USG dalam dunia medis?')">USG & Doppler</div>
+      <div class="chip" onclick="sendQuick('Apa itu Sonic Boom dan kaitannya dengan Efek Doppler?')">Sonic Boom</div>
+      <div class="chip" onclick="sendQuick('Bagaimana Efek Doppler digunakan pada radar kecepatan polisi?')">Radar kecepatan</div>
+    </div>
+    <div class="chat-wrap">
+      <div class="chat-messages" id="chatMessages">
+        <div class="msg msg-ai">
+          <div class="msg-avatar av-ai">AI</div>
+          <div class="msg-bubble bub-ai">Halo! Saya asisten AI untuk materi Efek Doppler. Silakan tanyakan apa saja — mulai dari konsep dasar, rumus, contoh aplikasi, hingga soal latihan. Saya siap membantu kamu memahami materi ini! 👋</div>
+        </div>
+      </div>
+      <div class="chat-input-row">
+        <input type="text" id="chatInput" placeholder="Tulis pertanyaanmu di sini..." onkeydown="if(event.key==='Enter')sendChat()">
+        <button id="sendBtn" onclick="sendChat()"><i class="ti ti-send"></i> Kirim</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== KUIS ===== -->
+<div class="page" id="page-kuis">
+  <div id="quizMain">
+    <div class="card">
+      <div class="quiz-header">
+        <span class="q-meta" id="qNum">1 / 8</span>
+        <div class="progress-wrap"><div class="progress-fill" id="qProgress" style="width:12.5%"></div></div>
+        <span class="q-meta" id="qScore">Skor: 0</span>
+      </div>
+      <div class="q-text" id="qText"></div>
+      <div class="q-opts" id="qOpts"></div>
+      <div class="q-fb" id="qFb"></div>
+      <button class="btn-next" id="btnNext" onclick="nextQ()">Soal Berikutnya →</button>
+    </div>
+
+    <div class="card">
+      <h3><i class="ti ti-chart-bar"></i>Profil Self-Efficacy Kamu</h3>
+      <div class="se-wrap" id="seWrap"></div>
+      <p style="font-size:11px;color:var(--text3);margin-top:0.75rem">Diperbarui setiap kamu menjawab soal</p>
+    </div>
+  </div>
+
+  <div id="quizDone" style="display:none">
+    <div class="card result-page">
+      <div class="score-big" id="finalScore">—</div>
+      <div class="score-sub">dari 8 soal benar</div>
+      <div class="score-msg" id="scoreMsg"></div>
+      <div class="score-cats">
+        <div class="score-cat"><div class="n" style="color:var(--blue)" id="catA">—</div><div class="l">Konsep</div></div>
+        <div class="score-cat"><div class="n" style="color:var(--green)" id="catB">—</div><div class="l">Perhitungan</div></div>
+        <div class="score-cat"><div class="n" style="color:var(--amber)" id="catC">—</div><div class="l">Aplikasi</div></div>
+      </div>
+      <br>
+      <div class="card" style="text-align:left;max-width:400px;margin:0 auto">
+        <h3><i class="ti ti-chart-bar"></i>Self-Efficacy Akhir</h3>
+        <div class="se-wrap" id="seWrapFinal"></div>
+      </div>
+      <button class="btn-retry" onclick="restartQuiz()">Ulangi Kuis</button>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  Virtual Laboratory Assistant — Efek Doppler · SMA/MA Kelas XI · Dibuat untuk penelitian skripsi
+</div>
+
+<script>
+// =========== NAVIGATION ===========
+let simStarted = false, waveStarted = false;
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.getElementById('tab-'+id).classList.add('active');
+  if (id === 'simulasi' && !simStarted) { simStarted = true; initSim(); }
+  if (id === 'visualisasi' && !waveStarted) { waveStarted = true; initWave(); }
+}
+
+// =========== SIMULATION ===========
+let simT = 0, simWaves = [];
+function initSim() {
+  const c = document.getElementById('simCanvas');
+  c.width = c.offsetWidth;
+  updateSim();
+  animSim();
+}
+function updateSim() {
+  const vs = +document.getElementById('vsSlider').value;
+  const fs = +document.getElementById('fsSlider').value;
+  const vb = +document.getElementById('vbSlider').value;
+  const dir = +document.getElementById('dirSlider').value;
+  document.getElementById('vsVal').textContent = vs+' m/s';
+  document.getElementById('fsVal').textContent = fs+' Hz';
+  document.getElementById('vbVal').textContent = vb+' m/s';
+  document.getElementById('dirVal').textContent = dir===0?'Mendekati':'Menjauh';
+  let fa, fr, delta;
+  if (vs < vb) {
+    fa = Math.round(vb/(vb-vs)*fs);
+    fr = Math.round(vb/(vb+vs)*fs);
+    delta = fa-fr;
+    document.getElementById('freqApproach').textContent = fa+' Hz';
+    document.getElementById('freqRecede').textContent = fr+' Hz';
+    document.getElementById('deltaFreq').textContent = delta+' Hz';
+    document.getElementById('formulaDisplay').textContent = `f' = ${vb}/(${vb}−${vs}) × ${fs} = ${fa} Hz`;
+  } else {
+    document.getElementById('freqApproach').textContent = '∞';
+    document.getElementById('freqRecede').textContent = '—';
+    document.getElementById('deltaFreq').textContent = '—';
+    document.getElementById('formulaDisplay').textContent = 'vs ≥ v: Sonic Boom terjadi!';
+  }
+}
+function animSim() {
+  const c = document.getElementById('simCanvas');
+  if (!c || !simStarted) return;
+  const ctx = c.getContext('2d');
+  const W = c.width, H = c.height;
+  const vs = +document.getElementById('vsSlider').value;
+  const vb = +document.getElementById('vbSlider').value;
+  const speed = vs/vb;
+  simT += 0.5;
+  const srcX = (W*0.1 + simT*speed*2.2) % (W*0.8) + W*0.1;
+
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='#080d1a'; ctx.fillRect(0,0,W,H);
+
+  // Road
+  ctx.fillStyle='#111827'; ctx.fillRect(0,H-50,W,50);
+  ctx.strokeStyle='#1f2d44'; ctx.lineWidth=1;
+  ctx.setLineDash([20,15]);
+  ctx.beginPath(); ctx.moveTo(0,H-25); ctx.lineTo(W,H-25); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Wavefronts
+  if (simT%16<1) simWaves.push({x:srcX, r:0, born:simT});
+  simWaves = simWaves.filter(w=>w.r<W);
+  simWaves.forEach(w => {
+    w.r += vb/340*2.2;
+    const age = (simT-w.born)/100;
+    const alpha = Math.max(0, 0.75-age*1.4);
+    ctx.strokeStyle = `rgba(79,195,247,${alpha})`;
+    ctx.lineWidth=1.2;
+    ctx.beginPath(); ctx.arc(w.x, H-50, w.r, Math.PI,0); ctx.stroke();
+  });
+
+  // Source (car body)
+  ctx.fillStyle='#FFB74D';
+  ctx.beginPath(); ctx.roundRect(srcX-20,H-78,40,28,6); ctx.fill();
+  ctx.fillStyle='#FF8F00';
+  ctx.beginPath(); ctx.roundRect(srcX-14,H-90,28,16,4); ctx.fill();
+  // wheels
+  ctx.fillStyle='#263238';
+  ctx.beginPath(); ctx.arc(srcX-12,H-51,7,0,Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(srcX+12,H-51,7,0,Math.PI*2); ctx.fill();
+  ctx.strokeStyle='#546E7A'; ctx.lineWidth=1.5;
+  ctx.beginPath(); ctx.arc(srcX-12,H-51,7,0,Math.PI*2); ctx.stroke();
+  ctx.beginPath(); ctx.arc(srcX+12,H-51,7,0,Math.PI*2); ctx.stroke();
+
+  // Observer (person)
+  const obsX = W*0.87;
+  ctx.fillStyle='#81C784';
+  ctx.beginPath(); ctx.arc(obsX,H-80,9,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle='#4CAF50';
+  ctx.beginPath(); ctx.roundRect(obsX-5,H-71,10,22,3); ctx.fill();
+
+  // Labels
+  ctx.fillStyle='rgba(170,170,170,0.8)';
+  ctx.font='11px "Plus Jakarta Sans",sans-serif';
+  ctx.textAlign='center';
+  ctx.fillText('Sumber Bunyi', srcX, H-6);
+  ctx.fillText('Pengamat', obsX, H-6);
+
+  // Status top-left
+  ctx.fillStyle = vs>=vb ? '#EF5350' : '#81C784';
+  ctx.textAlign='left'; ctx.font='11px monospace';
+  ctx.fillText(`vs=${vs} m/s  v=${vb} m/s  vs/v=${(vs/vb).toFixed(2)}`, 12, 18);
+  if (vs>=vb) {
+    ctx.fillStyle='#EF5350';
+    ctx.fillText('⚠ SONIC BOOM!', W/2-40, 18);
+  }
+  requestAnimationFrame(animSim);
+}
+
+// =========== WAVE VIZ ===========
+let waveT = 0, waveWaves = [], wavePaused = false, waveScenario = 'approach';
+function initWave() {
+  const c = document.getElementById('waveCanvas');
+  c.width = c.offsetWidth;
+  updateWaveInfo();
+  animWave();
+}
+function togglePause() {
+  wavePaused = !wavePaused;
+  document.getElementById('pauseBtn').textContent = wavePaused ? '▶ Lanjut' : '⏸ Jeda';
+}
+function toggleScenario() {
+  waveScenario = waveScenario==='approach'?'recede':'approach';
+  document.getElementById('scenBtn').textContent = waveScenario==='approach'?'Mendekati':'Menjauh';
+  waveWaves = [];
+}
+function updateWaveInfo() {
+  const v = +document.getElementById('wvSlider').value/100;
+  document.getElementById('wvLabel').textContent = v.toFixed(2)+'× bunyi';
+  const vb=340, vs=v*vb, f0=440;
+  document.getElementById('wvFreqA').textContent = vs<vb ? Math.round(vb/(vb-vs)*f0) : '∞';
+  document.getElementById('wvFreqB').textContent = Math.round(vb/(vb+vs)*f0);
+}
+function animWave() {
+  const c = document.getElementById('waveCanvas');
+  if (!c || !waveStarted) return;
+  const ctx = c.getContext('2d');
+  const W = c.width, H = c.height;
+  const vRatio = +document.getElementById('wvSlider').value/100;
+
+  if (!wavePaused) {
+    waveT += 0.6;
+    let srcX = waveScenario==='approach'
+      ? W*0.12 + (waveT*vRatio*2.8)%(W*0.72)
+      : W*0.88 - (waveT*vRatio*2.8)%(W*0.72);
+    if (waveT%18<1) waveWaves.push({x:srcX, r:0, born:waveT});
+    waveWaves = waveWaves.filter(w=>w.r<W*1.1);
+    waveWaves.forEach(w=>w.r+=2.8);
+
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle='#080d1a'; ctx.fillRect(0,0,W,H);
+    // Grid
+    ctx.strokeStyle='#0d1929'; ctx.lineWidth=0.5;
+    for(let x=0;x<W;x+=40){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}
+    for(let y=0;y<H;y+=40){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
+    // Waves
+    waveWaves.forEach(w=>{
+      const age=(waveT-w.born)/130;
+      const a=Math.max(0,0.85-age*1.2);
+      const r=Math.max(0,200-Math.round(age*200));
+      const g=Math.max(0,160+Math.round((1-age)*95));
+      const b=Math.max(0,230-Math.round(age*80));
+      ctx.strokeStyle=`rgba(${r},${g},${b},${a})`;
+      ctx.lineWidth=1.5;
+      ctx.beginPath();ctx.arc(w.x,H/2,w.r,0,Math.PI*2);ctx.stroke();
+    });
+    // Observer
+    const obsX = waveScenario==='approach'?W*0.9:W*0.1;
+    ctx.fillStyle='#81C784';
+    ctx.beginPath();ctx.arc(obsX,H/2-18,9,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#4CAF50';ctx.fillRect(obsX-4,H/2-9,8,22);
+    // Source
+    ctx.fillStyle='#FFB74D';
+    ctx.beginPath();ctx.arc(srcX,H/2,12,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#FF8F00';
+    ctx.beginPath();ctx.arc(srcX,H/2,7,0,Math.PI*2);ctx.fill();
+    // Arrow dir
+    ctx.strokeStyle='rgba(255,183,77,0.5)'; ctx.lineWidth=1.5; ctx.setLineDash([4,3]);
+    const d=waveScenario==='approach'?1:-1;
+    ctx.beginPath();ctx.moveTo(srcX,H/2+32);ctx.lineTo(srcX+d*28,H/2+32);ctx.stroke();
+    ctx.setLineDash([]);
+    // Labels
+    ctx.fillStyle='rgba(150,150,150,0.7)';ctx.font='11px monospace';ctx.textAlign='center';
+    ctx.fillText('Sumber',srcX,H-10);
+    ctx.fillText('Pengamat',obsX,H-10);
+    ctx.fillText(`${waveScenario==='approach'?'Mendekati':'Menjauh'} | vs=${(vRatio*340).toFixed(0)} m/s`,W/2,16);
+    updateWaveInfo();
+  }
+  requestAnimationFrame(animWave);
+}
+
+// =========== AI CHAT ===========
+const chatHistory = [];
+async function sendChat() {
+  const inp = document.getElementById('chatInput');
+  const msg = inp.value.trim();
+  if (!msg) return;
+  inp.value = '';
+  appendMsg('user', msg);
+  chatHistory.push({role:'user',content:msg});
+  document.getElementById('sendBtn').disabled = true;
+  const bubble = appendMsg('ai','<span class="typing-dots"><span>•</span><span>•</span><span>•</span></span>');
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        system:`Kamu adalah asisten AI Virtual Laboratory untuk materi Efek Doppler di tingkat SMA/MA kelas XI Indonesia.
+Tugasmu membantu siswa memahami Efek Doppler dengan bahasa yang jelas, mudah dipahami, dan sesuai kurikulum Merdeka Belajar.
+Gunakan Bahasa Indonesia yang baik dan benar. Sertakan rumus jika relevan menggunakan format teks biasa (f' = v/(v-vs) × f0).
+Berikan contoh nyata dari kehidupan sehari-hari. Jaga jawaban tetap ringkas namun komprehensif (maksimal 4 paragraf).
+Fokus hanya pada topik Efek Doppler dan gelombang bunyi. Jangan gunakan markdown formatting.`,
+        messages: chatHistory.slice(-10)
+      })
+    });
+    const data = await res.json();
+    const reply = data.content?.[0]?.text || 'Maaf, terjadi kesalahan. Silakan coba lagi.';
+    chatHistory.push({role:'assistant',content:reply});
+    bubble.innerHTML = reply.replace(/\n/g,'<br>');
+  } catch(e) {
+    bubble.textContent = 'Maaf, tidak dapat terhubung ke AI. Pastikan perangkat terhubung ke internet.';
+  }
+  document.getElementById('sendBtn').disabled = false;
+}
+function appendMsg(role, text) {
+  const wrap = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = `msg msg-${role==='ai'?'ai':'user'}`;
+  const av = document.createElement('div');
+  av.className = `msg-avatar av-${role==='ai'?'ai':'user'}`;
+  av.textContent = role==='ai'?'AI':'S';
+  const bub = document.createElement('div');
+  bub.className = `msg-bubble bub-${role==='ai'?'ai':'user'}`;
+  bub.innerHTML = text;
+  div.appendChild(av); div.appendChild(bub);
+  wrap.appendChild(div);
+  wrap.scrollTop = wrap.scrollHeight;
+  return bub;
+}
+function sendQuick(t) { document.getElementById('chatInput').value=t; sendChat(); }
+
+// =========== QUIZ ===========
+const questions = [
+  {
+    text:'Seorang siswa berdiri di tepi jalan. Ambulans mendekatinya dengan sirene menyala. Apa yang terjadi pada frekuensi bunyi yang didengar siswa?',
+    opts:['Frekuensi terdengar lebih rendah dari frekuensi aslinya','Frekuensi terdengar sama dengan frekuensi aslinya','Frekuensi terdengar lebih tinggi dari frekuensi aslinya','Frekuensi berubah secara acak'],
+    ans:2, feedback:'Sumber mendekati pengamat → muka gelombang tertekan → panjang gelombang memendek → frekuensi meningkat. Rumus: f\' = v/(v−vs) × f₀', cat:0
+  },
+  {
+    text:'Rumus Efek Doppler untuk sumber bunyi mendekati pengamat yang diam adalah...',
+    opts:["f' = v/(v+vs) × f₀","f' = v/(v−vs) × f₀","f' = (v+vs)/v × f₀","f' = vs/v × f₀"],
+    ans:1, feedback:'Untuk sumber mendekati: f\' = v/(v−vs) × f₀. Tanda minus karena vs mengurangi jarak antar muka gelombang, sehingga frekuensi meningkat.', cat:1
+  },
+  {
+    text:'Kecepatan bunyi 340 m/s. Kereta mendekat dengan 20 m/s membunyikan klakson 500 Hz. Frekuensi yang didengar penumpang di stasiun adalah...',
+    opts:['471 Hz','531 Hz','510 Hz','490 Hz'],
+    ans:1, feedback:"f' = 340/(340−20) × 500 = 340/320 × 500 = 531 Hz. Frekuensi meningkat karena kereta mendekati stasiun.", cat:1
+  },
+  {
+    text:'Aplikasi Efek Doppler dalam bidang kesehatan yang paling tepat adalah...',
+    opts:['Rontgen (X-ray) untuk melihat tulang','USG Doppler untuk mengukur aliran darah','MRI untuk pencitraan jaringan lunak','Termometer inframerah untuk suhu tubuh'],
+    ans:1, feedback:'USG Doppler menggunakan gelombang ultrasonik dan prinsip Doppler untuk mengukur kecepatan serta arah aliran darah, berguna mendeteksi gangguan kardiovaskular.', cat:2
+  },
+  {
+    text:'Jika kecepatan sumber bunyi (vs) sama dengan kecepatan bunyi (v), apa yang terjadi?',
+    opts:['Frekuensi yang terdengar menjadi dua kali lipat','Tidak ada bunyi yang terdengar di depan sumber','Terjadi Sonic Boom (gelombang kejut)','Bunyi terdengar sangat pelan'],
+    ans:2, feedback:'Saat vs = v, semua muka gelombang di depan bertumpuk membentuk gelombang kejut (Sonic Boom). Ini terjadi pada pesawat yang melampaui kecepatan bunyi (supersonik).', cat:2
+  },
+  {
+    text:'Sumber bunyi bergerak menjauh dari pengamat. Efek yang terjadi adalah...',
+    opts:['Pitch lebih tinggi, panjang gelombang lebih pendek','Pitch lebih rendah, panjang gelombang lebih panjang','Volume suara lebih keras','Tidak ada perubahan frekuensi sama sekali'],
+    ans:1, feedback:'Sumber menjauh: f\' = v/(v+vs) × f₀. Frekuensi turun (pitch rendah) karena panjang gelombang meregang. Contoh: sirene yang sudah melewati kita.', cat:0
+  },
+  {
+    text:'Efek Doppler pada cahaya (Redshift) digunakan dalam astronomi untuk...',
+    opts:['Mengukur suhu permukaan bintang','Menentukan apakah galaksi bergerak menjauh atau mendekat','Mengukur massa lubang hitam','Menghitung ukuran tata surya'],
+    ans:1, feedback:'Redshift adalah Efek Doppler pada cahaya. Galaksi yang menjauh mengeluarkan cahaya bergeser ke merah (frekuensi turun). Ini bukti bahwa alam semesta terus mengembang.', cat:2
+  },
+  {
+    text:'Truk bergerak menjauh dengan vs = 30 m/s, klakson 600 Hz, kecepatan bunyi 340 m/s. Frekuensi yang didengar adalah...',
+    opts:['545 Hz','551 Hz','660 Hz','630 Hz'],
+    ans:1, feedback:"f' = 340/(340+30) × 600 = 340/370 × 600 ≈ 551 Hz. Frekuensi berkurang karena truk menjauh dari pengamat.", cat:1
+  }
+];
+
+let curQ=0, score=0, catS=[0,0,0], catT=[0,0,0], answered=false;
+function initQuiz() {
+  const q = questions[curQ];
+  document.getElementById('qNum').textContent = `${curQ+1} / ${questions.length}`;
+  document.getElementById('qProgress').style.width = ((curQ+1)/questions.length*100)+'%';
+  document.getElementById('qText').textContent = q.text;
+  document.getElementById('qFb').style.display = 'none';
+  document.getElementById('btnNext').style.display = 'none';
+  answered = false;
+  catT[q.cat]++;
+  const opts = document.getElementById('qOpts');
+  opts.innerHTML = '';
+  ['A','B','C','D'].forEach((l,i) => {
+    const d = document.createElement('div');
+    d.className='q-opt';
+    d.innerHTML=`<div class="opt-letter">${l}</div>${q.opts[i]}`;
+    d.onclick=()=>selectAns(i,d);
+    opts.appendChild(d);
+  });
+  renderSE();
+}
+function selectAns(idx, el) {
+  if (answered) return;
+  answered=true;
+  const q=questions[curQ];
+  document.querySelectorAll('.q-opt').forEach(o=>o.classList.add('disabled'));
+  const fb=document.getElementById('qFb');
+  if (idx===q.ans) {
+    el.classList.add('correct');
+    score++; catS[q.cat]++;
+    document.getElementById('qScore').textContent='Skor: '+score;
+    fb.className='q-fb fb-ok';
+    fb.innerHTML='<strong>✓ Benar!</strong> '+q.feedback;
+  } else {
+    el.classList.add('wrong');
+    document.querySelectorAll('.q-opt')[q.ans].classList.add('correct');
+    fb.className='q-fb fb-no';
+    fb.innerHTML='<strong>✗ Kurang tepat.</strong> '+q.feedback;
+  }
+  fb.style.display='block';
+  document.getElementById('btnNext').style.display='inline-block';
+  renderSE();
+}
+function nextQ() {
+  curQ++;
+  if (curQ>=questions.length) showResult();
+  else initQuiz();
+}
+function showResult() {
+  document.getElementById('quizMain').style.display='none';
+  document.getElementById('quizDone').style.display='block';
+  document.getElementById('finalScore').textContent=score;
+  const p=score/questions.length;
+  const msgs=['Tetap semangat! Pelajari kembali materi Efek Doppler dari awal.','Bagus! Kamu mulai memahami Efek Doppler. Terus berlatih!','Luar biasa! Kamu menguasai materi Efek Doppler dengan sangat baik! 🎉'];
+  document.getElementById('scoreMsg').textContent = p<0.5?msgs[0]:p<0.75?msgs[1]:msgs[2];
+  document.getElementById('catA').textContent=catS[0]+'/'+catT[0];
+  document.getElementById('catB').textContent=catS[1]+'/'+catT[1];
+  document.getElementById('catC').textContent=catS[2]+'/'+catT[2];
+  renderSEFinal();
+}
+function restartQuiz() {
+  curQ=0;score=0;catS=[0,0,0];catT=[0,0,0];answered=false;
+  document.getElementById('quizMain').style.display='block';
+  document.getElementById('quizDone').style.display='none';
+  document.getElementById('qScore').textContent='Skor: 0';
+  questions.forEach(q=>catT[q.cat]=0);
+  initQuiz();
+}
+function renderSE() {
+  const ls=['Pemahaman Konsep','Kemampuan Hitung','Penerapan Nyata'];
+  const cs=['#185FA5','#3B6D11','#BA7517'];
+  const vs=ls.map((_,i)=>Math.min(100,Math.round(catS[i]/Math.max(1,catT[i])*100)));
+  document.getElementById('seWrap').innerHTML=ls.map((l,i)=>`
+    <div class="se-row">
+      <div class="se-label">${l}</div>
+      <div class="se-bar-bg"><div class="se-bar-fill" style="width:${vs[i]}%;background:${cs[i]}"></div></div>
+      <div class="se-pct" style="color:${cs[i]}">${vs[i]}%</div>
+    </div>`).join('');
+}
+function renderSEFinal() {
+  const ls=['Pemahaman Konsep','Kemampuan Hitung','Penerapan Nyata'];
+  const cs=['#185FA5','#3B6D11','#BA7517'];
+  const vs=ls.map((_,i)=>Math.min(100,Math.round(catS[i]/Math.max(1,catT[i])*100)));
+  document.getElementById('seWrapFinal').innerHTML=ls.map((l,i)=>`
+    <div class="se-row">
+      <div class="se-label">${l}</div>
+      <div class="se-bar-bg"><div class="se-bar-fill" style="width:${vs[i]}%;background:${cs[i]}"></div></div>
+      <div class="se-pct" style="color:${cs[i]}">${vs[i]}%</div>
+    </div>`).join('');
+}
+
+// INIT
+initQuiz();
+</script>
+</body>
+</html>
